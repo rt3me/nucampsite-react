@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# Nucampsite React Version
+
+* React version of project completed during Nucamp.co full stack JavaScript bootcamp
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
