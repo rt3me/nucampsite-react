@@ -9,7 +9,7 @@ class Directory extends Component {
   }
 
   render() {
-    const directory = this.state.campsites.map((campsite) => {
+    const directory = this.props.campsites.map((campsite) => {
       return (
         <div key={campsite.id} className="col">
           <img src={campsite.image} alt={campsite.name} />
