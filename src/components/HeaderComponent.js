@@ -1,7 +1,23 @@
 import React, { Component } from "react";
-import { Navbar, NavbarBrand, Jumbotron } from "reactstrap";
+import { Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem, Jumbotron } from "reactstrap";
+import { NavLink } from "react-router-dom";
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+
+    this.toggleNav = this.toggleNav.bind(this);
+    this.state = {
+      isNavOpen: false,
+    };
+  }
+
+  toggleNav() {
+    this.setState({
+      isNavOpen: !this.state.isNavOpen,
+    });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -15,9 +31,12 @@ class Header extends Component {
             </div>
           </div>
         </Jumbotron>
-        <Navbar dark sticky="top">
+        <Navbar dark sticky="top" expand="md">
           <div className="container">
-            <NavbarBrand href="/">NuCamp</NavbarBrand>
+            <NavbarBrand className="mr-auto" href="/">
+              <img src="/assets/images/logo.png" height="30" width="30" alt="NuCamp Logo" />
+              <NavbarToggler onClick={this.toggleNav} />
+            </NavbarBrand>
           </div>
         </Navbar>
       </React.Fragment>
