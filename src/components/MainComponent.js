@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import Directory from "./DirectoryComponent";
-import Header from "./HeaderComponent";
-import Footer from "./FooterComponent";
-import Home from "./HomeComponent";
-import { Switch, Route, Redirect } from "react-router-dom";
-import { CAMPSITES } from "../shared/campsites.js";
+import React, { Component } from 'react';
+import Directory from './DirectoryComponent';
+import Header from './HeaderComponent';
+import Footer from './FooterComponent';
+import Home from './HomeComponent';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { CAMPSITES } from '../shared/campsites.js';
 
 class Main extends Component {
   constructor(props) {

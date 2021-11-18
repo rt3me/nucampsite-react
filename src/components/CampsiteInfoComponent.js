@@ -1,5 +1,5 @@
-import React from "react";
-import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
+import React from 'react';
+import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
 function RenderCampsite({campsite}) {
   return (
