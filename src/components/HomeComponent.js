@@ -8,4 +8,4 @@ function Home(props) {
   );
 }
 
-export default HomeComponent;
+export default Home;
