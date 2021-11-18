@@ -9,31 +9,31 @@ function Footer() {
             <h5>Links</h5>
             <ul className="list-unstyled">
               <li>
-                <a href="#">Home</a>
+                <a href="/">Home</a>
               </li>
               <li>
-                <a href="#">Directory</a>
+                <a href="/directory">Directory</a>
               </li>
               <li>
-                <a href="#">About</a>
+                <a href="/about">About</a>
               </li>
               <li>
-                <a href="#">Contact</a>
+                <a href="/contact">Contact</a>
               </li>
             </ul>
           </div>
           <div className="col-6 col-sm-3 text-center">
             <h5>Social</h5>
-            <a className="btn btn-social-icon btn-instagram" href="http://instagram.com/">
+            <a className="btn btn-social-icon btn-instagram" href="https://instagram.com/">
               <i className="fa fa-instagram" />
             </a>{" "}
-            <a className="btn btn-social-icon btn-facebook" href="http://www.facebook.com/">
+            <a className="btn btn-social-icon btn-facebook" href="https://www.facebook.com/">
               <i className="fa fa-facebook" />
             </a>{" "}
-            <a className="btn btn-social-icon btn-twitter" href="http://twitter.com/">
+            <a className="btn btn-social-icon btn-twitter" href="https://twitter.com/">
               <i className="fa fa-twitter" />
             </a>{" "}
-            <a className="btn btn-social-icon btn-google" href="http://youtube.com/">
+            <a className="btn btn-social-icon btn-google" href="https://youtube.com/">
               <i className="fa fa-youtube" />
             </a>
           </div>
