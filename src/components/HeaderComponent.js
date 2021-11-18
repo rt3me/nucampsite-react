@@ -35,8 +35,32 @@ class Header extends Component {
           <div className="container">
             <NavbarBrand className="mr-auto" href="/">
               <img src="/assets/images/logo.png" height="30" width="30" alt="NuCamp Logo" />
-              <NavbarToggler onClick={this.toggleNav} />
             </NavbarBrand>
+            <NavbarToggler onClick={this.toggleNav} />
+            <Collapse isOpen={this.state.isNavOpen} navbar>
+              <Nav navbar>
+                <NavItem>
+                  <NavLink className="nav-link" to="/">
+                    <i className="fa fa-home fa-lg" /> Home
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link" to="/directory">
+                    <i className="fa fa-list fa-lg" /> Directory
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link" to="/about">
+                    <i className="fa fa-info fa-lg" /> About
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link" to="/contact-us">
+                    <i className="fa fa-address-card fa-lg" /> Contact Us
+                  </NavLink>
+                </NavItem>
+              </Nav>
+            </Collapse>
           </div>
         </Navbar>
       </React.Fragment>
