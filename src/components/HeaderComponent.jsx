@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem, Jumbotron } from 'reactstrap';
-import { NavLink } from 'react-router-dom';
+import React, { Component } from "react";
+import { Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem, Jumbotron } from "reactstrap";
+import { NavLink } from "react-router-dom";
 
 class Header extends Component {
   constructor(props) {
@@ -55,7 +55,7 @@ class Header extends Component {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink className="nav-link" to="/contact-us">
+                  <NavLink className="nav-link" to="/contact">
                     <i className="fa fa-address-card fa-lg" /> Contact Us
                   </NavLink>
                 </NavItem>

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -19,7 +19,7 @@ function Footer() {
                 <Link to="/about">About</Link>
               </li>
               <li>
-                <Link to="/contact-us">Contact</Link>
+                <Link to="/contact">Contact</Link>
               </li>
             </ul>
           </div>
