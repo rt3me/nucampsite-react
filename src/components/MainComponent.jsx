@@ -6,6 +6,9 @@ import Home from "./HomeComponent";
 import Contact from "./ContactComponent";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { CAMPSITES } from "../shared/campsites";
+import { COMMENTS } from "../shared/comments";
+import { PROMOTIONS } from "../shared/promotions";
+import { PARTNERS } from "../shared/partners";
 
 class Main extends Component {
   constructor(props) {
