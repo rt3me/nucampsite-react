@@ -15,6 +15,9 @@ class Main extends Component {
     super(props);
     this.state = {
       campsites: CAMPSITES,
+      comments: COMMENTS,
+      promotions: PROMOTIONS,
+      partners: PARTNERS,
     };
   }
 
