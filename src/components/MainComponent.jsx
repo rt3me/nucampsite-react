@@ -23,13 +23,7 @@ class Main extends Component {
 
   render() {
     const HomePage = () => {
-      return (
-        <Home
-          campsite={this.state.campsites.map((campsite) => campsite.featured === true)[0]}
-          promotion={this.state.promotions.map((promotion) => promotion.featured === true)[0]}
-          partner={this.state.partners.map((partner) => partner.featured === true)[0]}
-        />
-      );
+      return <Home campsite={this.state.campsites.map((campsite) => campsite.featured)[0]} promotion={this.state.promotions.map((promotion) => promotion.featured)[0]} partner={this.state.partners.map((partner) => partner.featured)[0]} />;
     };
     return (
       <div>
