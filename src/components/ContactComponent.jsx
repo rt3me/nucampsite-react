@@ -204,12 +204,12 @@ class Contact extends Component {
                 <Col md={{ size: 4, offset: 2 }}>
                   <div className="form-check">
                     <Label check>
-                      <Control.checkbox className="form-check-input" model=".agree" name="agree" checked={this.state.agree} /> <strong>&nbsp; May we contact you?</strong>
+                      <Control.checkbox className="form-check-input" model=".agree" id="agree" name="agree" checked={this.state.agree} /> <strong>&nbsp; May we contact you?</strong>
                     </Label>
                   </div>
                 </Col>
                 <Col md={4}>
-                  <Control.select className="form-control" model=".contactType" name="contactType">
+                  <Control.select className="form-control" model=".contactType" id="contactType" name="contactType">
                     <option>By Phone</option>
                     <option>By Email</option>
                   </Control.select>
