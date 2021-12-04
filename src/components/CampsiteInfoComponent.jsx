@@ -8,7 +8,7 @@ const minLength = (len) => (val) => val && val.length >= len;
 
 function RenderCampsite({ campsite }) {
   return (
-    <div className="col-md-5 m-1">
+    <div className="m-1 col-md-5">
       <Card>
         <CardImg top src={campsite.image} alt={campsite.name} />
         <CardBody>
@@ -45,8 +45,8 @@ class CommentForm extends Component {
   }
 
   handleSubmit(values) {
-    console.log("Current state is: " + JSON.stringify(values));
-    alert("Current state is: " + JSON.stringify(values));
+    this.toggleModal();
+    this.props.addComment(this.props.campsiteId, values.rating, values.author, values.text);
   }
 
   render() {
@@ -110,10 +110,10 @@ class CommentForm extends Component {
   }
 }
 
-function RenderComments({ comments }) {
+function RenderComments({ comments, addComment, campsiteId }) {
   if (comments) {
     return (
-      <div className="col-md-5 m-1">
+      <div className="m-1 col-md-5">
         <h4>Comments</h4>
         {comments.map((comment) => {
           return (
@@ -126,12 +126,12 @@ function RenderComments({ comments }) {
             </div>
           );
         })}
-        <CommentForm />
+        <CommentForm campsiteId={campsiteId} addComment={addComment} />
       </div>
     );
   }
   return (
-    <div className="col-md-5 m-1">
+    <div className="m-1 col-md-5">
       <h4>Comments</h4>
       <CommentForm />
     </div>
@@ -156,7 +156,7 @@ function CampsiteInfo(props) {
         </div>
         <div className="row">
           <RenderCampsite campsite={props.campsite} />
-          <RenderComments comments={props.comments} />
+          <RenderComments comments={props.comments} addComment={props.addComment} campsiteId={props.campsite.id} />
         </div>
       </div>
     );
