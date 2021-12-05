@@ -78,7 +78,7 @@ export const campsitesFailed = (errMess) => ({
 });
 
 export const addCampsite = (campsites) => ({
-  type: ActionTypes.ADD_CAMPSITE,
+  type: ActionTypes.ADD_CAMPSITES,
   payload: campsites,
 });
 
@@ -148,6 +148,6 @@ export const promotionsFailed = (errMess) => ({
 });
 
 export const addPromotions = (promotions) => ({
-  type: ActionTypes.ADD_PROMOTION,
+  type: ActionTypes.ADD_PROMOTIONS,
   payload: promotions,
 });
