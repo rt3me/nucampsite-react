@@ -185,7 +185,7 @@ export const partnersFailed = (errMess) => ({
   payload: errMess,
 });
 
-export const addPartners = (promotions) => ({
+export const addPartners = (partners) => ({
   type: ActionTypes.ADD_PARTNERS,
-  payload: promotions,
+  payload: partners,
 });
