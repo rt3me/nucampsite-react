@@ -8,6 +8,7 @@ const maxLength = (len) => (val) => !val || val.length <= len;
 const minLength = (len) => (val) => val && val.length >= len;
 const isNumber = (val) => !isNaN(+val);
 const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
+
 class Contact extends Component {
   constructor(props) {
     super(props);
@@ -80,7 +81,7 @@ class Contact extends Component {
             <hr />
           </div>
           <div className="col-md-10">
-            <Form model="feedbackform" onSubmit={(values) => this.handleSubmit(values)}>
+            <Form model="feedbackForm" onSubmit={(values) => this.handleSubmit(values)}>
               <Row className="form-group">
                 <Label htmlFor="firstName" md={2}>
                   First Name
