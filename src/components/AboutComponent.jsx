@@ -1,22 +1,41 @@
 import React from "react";
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from "reactstrap";
 import { Link } from "react-router-dom";
+import { Loading } from "./LoadingComponent";
+import { baseUrl } from "../shared/baseUrl";
 
 function About(props) {
-  const partners = props.partners.map((partner) => {
+  function PartnerList(props) {
+    const partners = props.partners.partners.map((partner) => {
+      return (
+        <Media tag="li" key={partner.id}>
+          <RenderPartner partner={partner} isLoading={props.isLoading} errMess={props.ErrMess} />
+        </Media>
+      );
+    });
+    if (props.partners.isLoading) {
+      return <Loading />;
+    }
+    if (props.partners.errMess) {
+      return (
+        <div className="col">
+          <h4>{props.partners.errMess}</h4>
+        </div>
+      );
+    }
     return (
-      <Media tag="li" key={partner.id}>
-        <RenderPartner partner={partner} />
-      </Media>
+      <div className="mt-4 col">
+        <Media list>{partners}</Media>
+      </div>
     );
-  });
+  }
 
   function RenderPartner({ partner }) {
     if (partner) {
       return (
         <React.Fragment>
-          <Media object src={partner.image} alt="partner.name" width="150" />
-          <Media body className="ml-5 mb-4">
+          <Media object src={baseUrl + partner.image} alt="partner.name" width="150" />
+          <Media body className="mb-4 ml-5">
             <Media heading>{partner.name}</Media>
             {partner.description}
           </Media>
@@ -50,7 +69,7 @@ function About(props) {
         </div>
         <div className="col-sm-6">
           <Card>
-            <CardHeader className="bg-primary text-white">
+            <CardHeader className="text-white bg-primary">
               <h3>Facts At a Glance</h3>
             </CardHeader>
             <CardBody>
@@ -68,7 +87,7 @@ function About(props) {
           </Card>
         </div>
         <div className="col">
-          <Card className="bg-light mt-3">
+          <Card className="mt-3 bg-light">
             <CardBody>
               <blockquote className="blockquote">
                 <p className="mb-0">I will not follow where the path may lead, but I will go where there is no path, and I will leave a trail.</p>
@@ -84,9 +103,7 @@ function About(props) {
         <div className="col-12">
           <h3>Community Partners</h3>
         </div>
-        <div className="col mt-4">
-          <Media list>{partners}</Media>
-        </div>
+        <PartnerList partners={props.partners} />
       </div>
     </div>
   );
