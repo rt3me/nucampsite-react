@@ -1,6 +1,7 @@
-# Nucampsite React Version
+# Nucampsite React, Node.js, Express, MongoDB Version
 
 * React version of campsite website project completed during Nucamp.co full stack JavaScript bootcamp
+* Client code created in the current repository
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -70,3 +71,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Nucampsite Node Express
+
+* Node, express server for React project completed during Nucamp.co full stack JavaScript bootcamp
+* Imported from [nucampsite-node-express](https://github.com/rt3me/nucampsite-node-express)
