@@ -12,6 +12,8 @@ const promotionRouter = require("./routes/promotionRouter");
 const partnerRouter = require("./routes/partnerRouter");
 const uploadRouter = require("./routes/uploadRouter");
 const favoriteRouter = require("./routes/favoriteRouter");
+const commentRouter = require("./routes/commentRouter");
+
 const mongoose = require("mongoose");
 
 const url = config.mongoUrl;
@@ -50,16 +52,17 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(passport.initialize());
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+// app.use('/', indexRouter);
+app.use("/api/users", usersRouter);
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/campsites", campsiteRouter);
-app.use("/promotions", promotionRouter);
-app.use("/partners", partnerRouter);
-app.use("/imageUpload", uploadRouter);
-app.use("/favorites", favoriteRouter);
+app.use("/api/campsites", campsiteRouter);
+app.use("/api/promotions", promotionRouter);
+app.use("/api/partners", partnerRouter);
+// app.use('/imageUpload', uploadRouter);
+app.use("/api/favorites", favoriteRouter);
+app.use("/api/comments", commentRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
