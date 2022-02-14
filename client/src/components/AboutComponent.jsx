@@ -1,55 +1,56 @@
 import React from "react";
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from "reactstrap";
 import { Link } from "react-router-dom";
-import { Fade, Stagger } from "react-animation-components";
-import { Loading } from "./LoadingComponent";
 import { baseUrl } from "../shared/baseUrl";
+import { Loading } from "./LoadingComponent";
+import { Fade, Stagger } from "react-animation-components";
 
-function About(props) {
-  function PartnerList(props) {
-    const partners = props.partners.partners.map((partner) => {
-      return (
-        <Fade in key={partner.id}>
-          <Media tag="li">
-            <RenderPartner partner={partner} isLoading={props.isLoading} errMess={props.ErrMess} />
-          </Media>
-        </Fade>
-      );
-    });
-    if (props.partners.isLoading) {
-      return <Loading />;
-    }
-    if (props.partners.errMess) {
-      return (
-        <div className="col">
-          <h4>{props.partners.errMess}</h4>
-        </div>
-      );
-    }
+function RenderPartner({ partner }) {
+  if (partner) {
     return (
-      <div className="mt-4 col">
-        <Media list>
-          <Stagger in>{partners}</Stagger>
+      <React.Fragment>
+        <Media object src={baseUrl + partner.image} alt={partner.name} width="150" />
+        <Media body className="ml-5 mb-4">
+          <Media heading>{partner.name}</Media>
+          {partner.description}
         </Media>
+      </React.Fragment>
+    );
+  }
+  return <div />;
+}
+
+function PartnerList(props) {
+  const partners = props.partners.partners.map((partner) => {
+    return (
+      <Fade in key={partner._id}>
+        <Media tag="li">
+          <RenderPartner partner={partner} />
+        </Media>
+      </Fade>
+    );
+  });
+
+  if (props.partners.isLoading) {
+    return <Loading />;
+  }
+  if (props.partners.errMess) {
+    return (
+      <div className="col">
+        <h4>{props.partners.errMess}</h4>
       </div>
     );
   }
+  return (
+    <div className="col mt-4">
+      <Media list>
+        <Stagger in>{partners}</Stagger>
+      </Media>
+    </div>
+  );
+}
 
-  function RenderPartner({ partner }) {
-    if (partner) {
-      return (
-        <React.Fragment>
-          <Media object src={baseUrl + partner.image} alt="partner.name" width="150" />
-          <Media body className="mb-4 ml-5">
-            <Media heading>{partner.name}</Media>
-            {partner.description}
-          </Media>
-        </React.Fragment>
-      );
-    }
-    return <div />;
-  }
-
+function About(props) {
   return (
     <div className="container">
       <div className="row">
@@ -74,7 +75,7 @@ function About(props) {
         </div>
         <div className="col-sm-6">
           <Card>
-            <CardHeader className="text-white bg-primary">
+            <CardHeader className="bg-primary text-white">
               <h3>Facts At a Glance</h3>
             </CardHeader>
             <CardBody>
@@ -92,7 +93,7 @@ function About(props) {
           </Card>
         </div>
         <div className="col">
-          <Card className="mt-3 bg-light">
+          <Card className="bg-light mt-3">
             <CardBody>
               <blockquote className="blockquote">
                 <p className="mb-0">I will not follow where the path may lead, but I will go where there is no path, and I will leave a trail.</p>

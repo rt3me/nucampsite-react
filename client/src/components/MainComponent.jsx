@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import Directory from "./DirectoryComponent";
+import CampsiteInfo from "./CampsiteInfoComponent";
+import Favorites from "./FavoriteComponent";
 import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
 import Home from "./HomeComponent";
 import Contact from "./ContactComponent";
-import CampsiteInfo from "./CampsiteInfoComponent";
 import About from "./AboutComponent";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { actions } from "react-redux-form";
-import { postComment, fetchCampsites, fetchComments, fetchPromotions, fetchPartners, postFeedback } from "../redux/ActionCreators";
+import { postComment, postFeedback, fetchCampsites, fetchComments, fetchPromotions, fetchPartners, loginUser, logoutUser, fetchFavorites, postFavorite, deleteFavorite } from "../redux/ActionCreators";
+
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 const mapStateToProps = (state) => {
@@ -18,18 +20,24 @@ const mapStateToProps = (state) => {
     comments: state.comments,
     partners: state.partners,
     promotions: state.promotions,
+    favorites: state.favorites,
+    auth: state.auth,
   };
 };
 
-// can be set up as a function or an object (recommended)
 const mapDispatchToProps = {
-  postComment: (campsiteId, rating, author, text) => postComment(campsiteId, rating, author, text),
+  postComment: (campsiteId, rating, text) => postComment(campsiteId, rating, text),
+  postFeedback: (feedback) => postFeedback(feedback),
   fetchCampsites: () => fetchCampsites(),
   resetFeedbackForm: () => actions.reset("feedbackForm"),
   fetchComments: () => fetchComments(),
   fetchPromotions: () => fetchPromotions(),
   fetchPartners: () => fetchPartners(),
-  postFeedback: (newFeedback) => postFeedback(newFeedback),
+  loginUser: (creds) => loginUser(creds),
+  logoutUser: () => logoutUser(),
+  fetchFavorites: () => fetchFavorites(),
+  postFavorite: (campsiteId) => postFavorite(campsiteId),
+  deleteFavorite: (campsiteId) => deleteFavorite(campsiteId),
 };
 
 class Main extends Component {
@@ -38,7 +46,7 @@ class Main extends Component {
     this.props.fetchComments();
     this.props.fetchPromotions();
     this.props.fetchPartners();
-    console.log("Props are theeeese:", this.props.partners);
+    this.props.fetchFavorites();
   }
 
   render() {
@@ -59,30 +67,62 @@ class Main extends Component {
     };
 
     const CampsiteWithId = ({ match }) => {
-      return (
+      return this.props.auth.isAuthenticated ? (
         <CampsiteInfo
-          campsite={this.props.campsites.campsites.filter((campsite) => campsite.id === +match.params.campsiteId)[0]}
+          campsite={this.props.campsites.campsites.filter((campsite) => campsite._id === match.params.campsiteId)[0]}
           isLoading={this.props.campsites.isLoading}
           errMess={this.props.campsites.errMess}
-          comments={this.props.comments.comments.filter((comment) => comment.campsiteId === +match.params.campsiteId)}
+          comments={this.props.comments.comments.filter((comment) => comment.campsite === match.params.campsiteId)}
           commentsErrMess={this.props.comments.errMess}
           postComment={this.props.postComment}
+          favorite={this.props.favorites.favorites.exists ? this.props.favorites.favorites.campsites.some((campsite) => campsite._id === match.params.campsiteId) : false}
+          postFavorite={this.props.postFavorite}
+        />
+      ) : (
+        <CampsiteInfo
+          campsite={this.props.campsites.campsites.filter((campsite) => campsite._id === match.params.campsiteId)[0]}
+          isLoading={this.props.campsites.isLoading}
+          errMess={this.props.campsites.errMess}
+          comments={this.props.comments.comments.filter((comment) => comment.campsite === match.params.campsiteId)}
+          commentsErrMess={this.props.comments.errMess}
+          postComment={this.props.postComment}
+          favorite={false}
+          postFavorite={this.props.postFavorite}
         />
       );
     };
 
+    const PrivateRoute = ({ component: Component, ...rest }) => (
+      <Route
+        {...rest}
+        render={(props) =>
+          this.props.auth.isAuthenticated ? (
+            <Component {...props} />
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/home",
+                state: { from: props.location },
+              }}
+            />
+          )
+        }
+      />
+    );
+
     return (
       <div>
-        <Header />
+        <Header auth={this.props.auth} loginUser={this.props.loginUser} logoutUser={this.props.logoutUser} />
         <TransitionGroup>
           <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
             <Switch>
-              <Route exact path="/" component={HomePage} />
+              <Route path="/home" component={HomePage} />
               <Route exact path="/directory" render={() => <Directory campsites={this.props.campsites} />} />
               <Route path="/directory/:campsiteId" component={CampsiteWithId} />
-              <Route exact path="/contact" render={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} postFeedback={this.props.postFeedback} />} />
-              <Route exact path="/about" render={() => <About partners={this.props.partners} isLoading={this.props.partners.isLoading} ErrMess={this.props.partners.errMess} />} />
-              <Redirect to="/" />
+              <PrivateRoute exact path="/favorites" component={() => <Favorites favorites={this.props.favorites} deleteFavorite={this.props.deleteFavorite} />} />
+              <Route exact path="/contactus" render={() => <Contact postFeedback={this.props.postFeedback} resetFeedbackForm={this.props.resetFeedbackForm} />} />
+              <Route exact path="/aboutus" render={() => <About partners={this.props.partners} />} />
+              <Redirect to="/home" />
             </Switch>
           </CSSTransition>
         </TransitionGroup>

@@ -7,7 +7,7 @@ import { baseUrl } from "../shared/baseUrl";
 function RenderDirectoryItem({ campsite }) {
   return (
     <Card>
-      <Link to={`/directory/${campsite.id}`}>
+      <Link to={`/directory/${campsite._id}`}>
         <CardImg width="100%" src={baseUrl + campsite.image} alt={campsite.name} />
         <CardImgOverlay>
           <CardTitle>{campsite.name}</CardTitle>
@@ -20,7 +20,7 @@ function RenderDirectoryItem({ campsite }) {
 function Directory(props) {
   const directory = props.campsites.campsites.map((campsite) => {
     return (
-      <div key={campsite.id} className="m-1 col-md-5">
+      <div key={campsite._id} className="col-md-5 m-1">
         <RenderDirectoryItem campsite={campsite} />
       </div>
     );
@@ -35,7 +35,6 @@ function Directory(props) {
       </div>
     );
   }
-
   if (props.campsites.errMess) {
     return (
       <div className="container">
@@ -47,22 +46,21 @@ function Directory(props) {
       </div>
     );
   }
-
   return (
     <div className="container">
       <div className="row">
         <div className="col">
           <Breadcrumb>
             <BreadcrumbItem>
-              <Link to="/">Home</Link>
+              <Link to="/home">Home</Link>
             </BreadcrumbItem>
             <BreadcrumbItem active>Directory</BreadcrumbItem>
           </Breadcrumb>
           <h2>Directory</h2>
           <hr />
         </div>
-        <div className="row">{directory}</div>
       </div>
+      <div className="row">{directory}</div>
     </div>
   );
 }

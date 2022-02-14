@@ -33,13 +33,13 @@ function Home(props) {
   return (
     <div className="container">
       <div className="row">
-        <div className="m-1 col-md">
+        <div className="col-md m-1">
           <RenderCard item={props.campsite} isLoading={props.campsitesLoading} errMess={props.campsitesErrMess} />
         </div>
-        <div className="m-1 col-md">
+        <div className="col-md m-1">
           <RenderCard item={props.promotion} isLoading={props.promotionLoading} errMess={props.promotionErrMess} />
         </div>
-        <div className="m-1 col-md">
+        <div className="col-md m-1">
           <RenderCard item={props.partner} isLoading={props.partnerLoading} errMess={props.partnerErrMess} />
         </div>
       </div>

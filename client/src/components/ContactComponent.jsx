@@ -13,26 +13,11 @@ class Contact extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      firstName: "",
-      lastName: "",
-      phoneNum: "",
-      email: "",
-      agree: false,
-      contactType: "By Phone",
-      feedback: "",
-      touched: {
-        firstName: false,
-        lastName: false,
-        phoneNum: false,
-        email: false,
-      },
-    };
-
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(values) {
+    console.log("Current state is: " + JSON.stringify(values));
     this.props.postFeedback(values);
     this.props.resetFeedbackForm();
   }
@@ -44,7 +29,7 @@ class Contact extends Component {
           <div className="col">
             <Breadcrumb>
               <BreadcrumbItem>
-                <Link to="/">Home</Link>
+                <Link to="/home">Home</Link>
               </BreadcrumbItem>
               <BreadcrumbItem active>Contact Us</BreadcrumbItem>
             </Breadcrumb>
@@ -74,6 +59,7 @@ class Contact extends Component {
             </a>
           </div>
         </div>
+
         <div className="row row-content">
           <div className="col-12">
             <h2>Send us your Feedback</h2>
@@ -205,12 +191,12 @@ class Contact extends Component {
                 <Col md={{ size: 4, offset: 2 }}>
                   <div className="form-check">
                     <Label check>
-                      <Control.checkbox className="form-check-input" model=".agree" id="agree" name="agree" checked={this.state.agree} /> <strong>&nbsp; May we contact you?</strong>
+                      <Control.checkbox model=".agree" name="agree" className="form-check-input" /> <strong>May we contact you?</strong>
                     </Label>
                   </div>
                 </Col>
                 <Col md={4}>
-                  <Control.select className="form-control" model=".contactType" id="contactType" name="contactType">
+                  <Control.select model=".contactType" name="contactType" className="form-control">
                     <option>By Phone</option>
                     <option>By Email</option>
                   </Control.select>
@@ -221,7 +207,7 @@ class Contact extends Component {
                   Your Feedback
                 </Label>
                 <Col md={10}>
-                  <Control.textarea className="form-control" model=".feedback" id="feedback" name="feedback" rows="12" />
+                  <Control.textarea model=".feedback" id="feedback" name="feedback" rows="12" className="form-control" />
                 </Col>
               </Row>
               <Row className="form-group">
